@@ -43,7 +43,7 @@ p{
   border: 2px dashed #333;
 }
 
-#run, #save{
+#run, #save,#processimg{
   border: 1px solid #555;
   border-radius: 5px;
   padding: 2px 5px;
@@ -51,7 +51,7 @@ p{
   background-color: #ddd;
 }
 
-#run:hover, #save:hover{
+#run:hover, #save:hover,#processimg:hover{
   background-color: #eee;
 }
 

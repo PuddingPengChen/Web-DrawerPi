@@ -7,29 +7,44 @@
     
     <title>potrace</title>
  	 <link rel="stylesheet" href="css/potrace.css">
+    <!-- Loading Bootstrap -->
+    <link href="css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   </head>
 
   <body data-pinterest-extension-installed="cr1.39.1">
-    <header>
-      <h1>potrace</h1>
-    </header>
-    	
+   
+      
+
+
+<div class="container">
+  <h1>potrace</h1>
     <article>
       <input type="file" id="imageInput" accept="image/*">
       <div id="drop"><a href="http://kilobtye.github.io/potrace/#" id="imageSelect">open an image</a> <br> or drag an image here</div>
       <div>
-        <a href="#" id="save">download</a>
+        <a href="#" id="save">下载</a>
       </div>
       <br>
-      <button id="processimg">处理</button>
+        <a href="#" id="processimg">处理</a>
+        <br>
+        <div id="loading">
+          <p><img src="./img/loading.gif" />正在上传，请等待...</p>
+        </div>
+    
+      <hr>
       <div id="imgdiv"> </div>
       <div> </div>
       <div id="svgdiv"> </div>
     </article>
+</div>
+
+
 <script src="js/vendor/jquery.min.js" ></script>
+<script src="js/flat-ui.min.js"></script>
 <script src="./js/potrace.js"></script>
 <script>
 var sss;
+$("#loading").hide();
 window.onload = function(){
   var imageSelect = document.getElementById("imageSelect"),
       imageInput = document.getElementById("imageInput");  
@@ -51,7 +66,7 @@ window.onload = function(){
   //     displaySVG(3);
   //   });
   // }, false);
-  
+ 
   document.getElementById("save").addEventListener("click", function (e) {
     
    e.target.download = "potrace" + (new Date()).toLocaleTimeString() + ".svg";
@@ -73,9 +88,9 @@ window.onload = function(){
         type: 'POST',
         data: fromData,
         processData: false,
+        beforeSend:function(){$("#loading").show();},
+        complete:function(){$("#loading").hide();console.log("Up loading finish!");},
         contentType: false
-      }).done(function(){
-
       });
     });
     
@@ -97,6 +112,7 @@ window.onload = function(){
     this.classList.remove('hovering');
     return false;
   }, false);
+
   
   drop.addEventListener("dragover", function (e) {
     if (e.preventDefault) e.preventDefault();
